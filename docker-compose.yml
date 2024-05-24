@@ -12,3 +12,24 @@ services:
       - ./app:/app
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=recipe_app
+      - DB_USER=postgres
+      - DB_PASS=secret
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=recipe_app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
+
+volumes:
+  postgres_data:
