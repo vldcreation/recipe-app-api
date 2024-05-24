@@ -1,12 +1,12 @@
 name: Checks
 
 on:
-  pull_request:
-    branches:
-      - [master, develop]
   push:
     branches:
-      - [master, develop]
+      - [ master, develop ]
+  pull_request:
+    branches:
+      - [ master, develop ]
 
 jobs:
   test-lint:
