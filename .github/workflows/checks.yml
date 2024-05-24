@@ -3,10 +3,14 @@ name: Checks
 on:
   push:
     branches:
-      - [ master, develop ]
+      - master
+      - develop
+      - main
   pull_request:
     branches:
-      - [ master, develop ]
+      - master
+      - develop
+      - main
 
 jobs:
   test-lint:
