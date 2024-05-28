@@ -3,6 +3,11 @@ test:
 	docker-compose run --rm app sh -c "python manage.py test"
 	@echo "Test completed"
 
+lint:
+	@echo "Running linter"
+	docker-compose run --rm app sh -c "python manage.py test && flake8"
+	@echo "linter completed"
+
 stop_local_db:
 	@echo "Stopped local database"
 	@pg_ctl -D "C:\Program Files\PostgreSQL\14\data" stop
@@ -13,4 +18,4 @@ start_local_db:
 	@pg_ctl -D "C:\Program Files\PostgreSQL\14\data" restart
 	@echo "Successfully running database"
 
-.PHONY: test start_local_db start_local_db
+.PHONY: test start_local_db start_local_db lint
