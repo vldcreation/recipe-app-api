@@ -3,6 +3,20 @@ test:
 	docker-compose run --rm app sh -c "python manage.py test"
 	@echo "Test completed"
 
+rebuild:
+	docker-compose down --remove-orphans --volumes
+	docker system prune -a
+	docker system prune --volumes
+	docker-compose up
+
+migration:
+	@echo "Create Migration File"
+	docker-compose run --rm app sh -c  "python manage.py makemigrations"
+
+migrate:
+	@echo "Running Migration File"
+	docker-compose run --rm app sh -c  "python manage.py wait_for_db && python manage.py migrate"
+
 lint:
 	@echo "Running linter"
 	docker-compose run --rm app sh -c "python manage.py test && flake8"
@@ -18,4 +32,4 @@ start_local_db:
 	@pg_ctl -D "C:\Program Files\PostgreSQL\14\data" restart
 	@echo "Successfully running database"
 
-.PHONY: test start_local_db start_local_db lint
+.PHONY: test start_local_db start_local_db lint rebuild migrate
