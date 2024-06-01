@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.utils.translation import gettext_lazy as _ # as _ is a convention for translation
+from django.utils.translation import gettext_lazy as _
 
 from core import models
 
@@ -12,7 +12,7 @@ class UserAdmin(BaseUserAdmin):
     ordering = ['id']
     list_display = ['email', 'name']
     fieldsets = (
-        ('Detail User', {'fields': ('email', 'password')}),  # None is the title of the section
+        ('Detail User', {'fields': ('email', 'password')}),
         (
             _('Permissions'),
             {
