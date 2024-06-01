@@ -4,10 +4,13 @@ test:
 	@echo "Test completed"
 
 rebuild:
-	docker-compose down --remove-orphans --volumes
+	docker-compose down --remove-orphans --volumes --rmi
 	docker system prune -a
 	docker system prune --volumes
 	docker-compose up
+
+rebuild-app:
+	docker-compose
 
 migration:
 	@echo "Create Migration File"
