@@ -127,7 +127,6 @@ class PublicUserApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-
 class PrivateUserApiTest(TestCase):
     """Test api request that require the authentication."""
 
