@@ -10,7 +10,10 @@ rebuild:
 	docker-compose up
 
 rebuild-app:
-	docker-compose
+	docker-compose up -d --no-deps --build app
+
+start:
+	docker-compose up
 
 migration:
 	@echo "Create Migration File"
@@ -35,4 +38,4 @@ start_local_db:
 	@pg_ctl -D "C:\Program Files\PostgreSQL\14\data" restart
 	@echo "Successfully running database"
 
-.PHONY: test start_local_db start_local_db lint rebuild migrate
+.PHONY: test rebuild rebuild-app migration migrate lint start_local_db stop_local_db start
