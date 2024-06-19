@@ -1,8 +1,11 @@
 """Test for models"""
+from decimal import Decimal  # noqa: F401
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from faker import Faker
+
+from core import models
 
 
 class ModelTests(TestCase):
@@ -47,3 +50,27 @@ class ModelTests(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_create_recipe(self):
+        """Test creating a new recipe is successful"""
+        fake = Faker()
+        email = fake.email()
+        password = fake.password()
+        user = get_user_model().objects.create_user(
+            email=email,
+            password=password
+        )
+
+        self.assertIsNotNone(user)
+        self.assertEqual(user.email, email)
+
+        recipe = models.Recipe.objects.create(
+            user=user,
+            title='Steak and mushroom sauce',
+            time_minutes=5,
+            price=5.00,
+            description='This is a test description'
+        )
+
+        self.assertIsNotNone(recipe)
+        self.assertEqual(str(recipe), recipe.title)
