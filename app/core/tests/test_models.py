@@ -1,11 +1,12 @@
 """Test for models"""
-from decimal import Decimal
+from decimal import Decimal  # noqa: F401
 
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from faker import Faker
 
 from core import models
+
 
 class ModelTests(TestCase):
     def test_create_user_with_email_successful(self):
