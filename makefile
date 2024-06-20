@@ -38,4 +38,10 @@ start_local_db:
 	@pg_ctl -D "C:\Program Files\PostgreSQL\14\data" restart
 	@echo "Successfully running database"
 
-.PHONY: test rebuild rebuild-app migration migrate lint start_local_db stop_local_db start
+app ?= ""
+createapp:
+	@echo "Creatin an app..."
+	docker-compose run --rm app sh -c "python manage.py startapp ${app}"
+	@echo "${app} created Successfully"
+
+.PHONY: test rebuild rebuild-app migration migrate lint start_local_db stop_local_db start createapp
