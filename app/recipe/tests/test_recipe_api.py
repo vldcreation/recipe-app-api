@@ -43,7 +43,7 @@ class PublicRecipeApiTests(TestCase):
 
     def test_auth_required(self):
         """Test that authentication is required"""
-        res = self.client.get(reverse(RECIPES_URL))
+        res = self.client.get(RECIPES_URL)
 
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -88,3 +88,4 @@ class PrivateRecipeApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(len(res.data), 1)
+        self.assertEqual(res.data, serializer.data)
