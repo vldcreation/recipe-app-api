@@ -14,8 +14,15 @@ class RecipeViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     queryset = Recipe.objects.all()
-    serializer_class = serializers.RecipeSerializer
+    serializer_class = serializers.RecipeDetailSerializer
 
     def get_queryset(self):
         """Return objects for the current authenticated user only."""
         return self.queryset.filter(user=self.request.user).order_by('-id')
+
+    def get_serializer_class(self):
+        """Return appropriate serializer class for request."""
+        if self.action == 'list':
+            return serializers.RecipeSerializer
+
+        return self.serializer_class
