@@ -44,4 +44,9 @@ createapp:
 	docker-compose run --rm app sh -c "python manage.py startapp ${app}"
 	@echo "${app} created Successfully"
 
-.PHONY: test rebuild rebuild-app migration migrate lint start_local_db stop_local_db start createapp
+superuser:
+	@echo "Running command to create superuser"
+	docker-compose run --rm app sh -c "python manage.py createsuperuser"
+	@echo "Created superuser Successfully"
+
+.PHONY: test rebuild rebuild-app migration migrate lint start_local_db stop_local_db start createapp superuser
