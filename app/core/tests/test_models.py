@@ -8,6 +8,11 @@ from faker import Faker
 from core import models
 
 
+def create_user(email='user@example.com', password='test@123'):
+    """Craete a sample user."""
+    return get_user_model().objects.create_user(email, password)
+
+
 class ModelTests(TestCase):
     def test_create_user_with_email_successful(self):
         """Test creating a new user with an email is successful"""
@@ -74,3 +79,13 @@ class ModelTests(TestCase):
 
         self.assertIsNotNone(recipe)
         self.assertEqual(str(recipe), recipe.title)
+
+    def test_create_tag(self):
+        """Test creating a new tag"""
+        tag = models.Tag.objects.create(
+            user=create_user(),
+            name='Vegan'
+        )
+
+        self.assertIsNotNone(tag)
+        self.assertEqual(str(tag), tag.name)
