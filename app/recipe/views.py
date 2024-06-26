@@ -38,7 +38,10 @@ class RecipeViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
 
-class TagViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
+class TagViewSet(viewsets.GenericViewSet,
+                 mixins.ListModelMixin,
+                 mixins.UpdateModelMixin,
+                 ):
     """Viewset for Manage tags APIs."""
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
