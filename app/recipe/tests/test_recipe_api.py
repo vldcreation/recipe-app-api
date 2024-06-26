@@ -223,18 +223,14 @@ class PrivateRecipeApiTests(TestCase):
             'price': Decimal('10.00'),
             'description': 'Sample description',
             'link': 'https://www.sample.com/recipe/1',
-            'tags': [
-                {'name': 'Vegan'},
-                {'name': 'Dessert'},
-            ]
+            'tags': [{'name': 'Vegan'}, {'name': 'Dessert'}]
         }
 
-        res = self.client.post(RECIPES_URL, payload)
+        res = self.client.post(RECIPES_URL, payload, format='json')
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         self.assertIsNotNone(res.data)
 
         recipe = Recipe.objects.get(id=res.data['id'])
-        print(recipe.tags.all())
         self.assertEqual(recipe.tags.count(), 2)
 
         for tag in payload['tags']:
@@ -257,7 +253,7 @@ class PrivateRecipeApiTests(TestCase):
             ]
         }
 
-        res = self.client.post(RECIPES_URL, payload)
+        res = self.client.post(RECIPES_URL, payload, format='json')
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         self.assertIsNotNone(res.data)
 
