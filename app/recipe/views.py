@@ -41,6 +41,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
 class TagViewSet(viewsets.GenericViewSet,
                  mixins.ListModelMixin,
                  mixins.UpdateModelMixin,
+                 mixins.DestroyModelMixin,
                  ):
     """Viewset for Manage tags APIs."""
     authentication_classes = (TokenAuthentication,)
