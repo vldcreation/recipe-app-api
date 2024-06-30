@@ -57,7 +57,7 @@ class TagViewSet(viewsets.GenericViewSet,
 
 class IngredientViewSet(viewsets.GenericViewSet,
                         mixins.ListModelMixin,
-                ):
+                        ):
     """Viewset for Manage ingredients APIs."""
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
