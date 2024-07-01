@@ -89,3 +89,13 @@ class ModelTests(TestCase):
 
         self.assertIsNotNone(tag)
         self.assertEqual(str(tag), tag.name)
+
+    def test_create_ingredient(self):
+        """Test creating a new ingredient."""
+        ingredient = models.Ingredient.objects.create(
+            user=create_user(),
+            name='Cucumber'
+        )
+
+        self.assertIsNotNone(ingredient)
+        self.assertEqual(str(ingredient), ingredient.name)

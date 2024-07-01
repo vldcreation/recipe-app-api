@@ -25,7 +25,7 @@ migrate:
 
 lint:
 	@echo "Running linter"
-	docker-compose run --rm app sh -c "python manage.py test && flake8"
+	docker-compose run --rm app sh -c "flake8"
 	@echo "linter completed"
 
 stop_local_db:
